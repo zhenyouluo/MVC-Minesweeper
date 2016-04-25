@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CMVC_MineSweeperDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIOMedium, &CMVC_MineSweeperDlg::OnBnClickedRadiomedium)
 	ON_BN_CLICKED(IDC_RADIOHard, &CMVC_MineSweeperDlg::OnBnClickedRadiohard)
 	ON_BN_CLICKED(IDC_RADIO4, &CMVC_MineSweeperDlg::OnBnClickedRadio4)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -214,6 +215,12 @@ void CMVC_MineSweeperDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	__super::OnLButtonDown(nFlags, point);
 }
 
+void CMVC_MineSweeperDlg::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	theApp.GetController()->DblClick(point.x, point.y, leftBarInPixels);
+
+	__super::OnLButtonDblClk(nFlags, point);
+}
 
 void CMVC_MineSweeperDlg::OnTimer(UINT_PTR nIDEvent)
 {
@@ -305,3 +312,6 @@ void CMVC_MineSweeperDlg::OnBnClickedRadio4()
 
 	
 }
+
+
+

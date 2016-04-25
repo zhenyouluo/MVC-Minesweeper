@@ -13,6 +13,13 @@ void Controller::Click(int x, int y,int z)
 	model->Click(i,j);
 }
 
+void Controller::DblClick(int x, int y, int z)
+{
+	int j = (x - z) / 20;
+	int i = (y - 60) / 20;
+	model->DblClick(i, j);
+}
+
 void Controller::RightClick(int x, int y,int z)
 {
 	int j = (x - z) / 20;

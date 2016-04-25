@@ -30,11 +30,13 @@ public:
 	void RemoveObserver(Observer*);
 	void NotifyObservers(Change);
 	void Click(int i, int j);
+	void DblClick(int i, int j);
 	void PutFlag(int i, int j);
 	void GenerateBombs(int numberOfCells);
 	void RestartGame(int m, int n, int bombs);
 	void IncrementTime();
 	int NumberOfNeighborBombs(int i, int j);
+	int NumberOfNeighborFlags(int i, int j);
 	int GetElementFromTableAt(int i, int j);
 	int GetNumberOfRemainingFlags();
 	DiscoveredStates GetElementFromDiscoveredTableAt(int i, int j);

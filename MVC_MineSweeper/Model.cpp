@@ -95,6 +95,11 @@ void Model::Click(int i, int j)
 		return;
 	}
 
+	if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+	{
+		return;
+	}
+
 	if (table[i][j] == -1)
 	{
 		DiscoverAllBombs();
@@ -116,6 +121,23 @@ void Model::Click(int i, int j)
 		NotifyObservers(Change::GAME_WON);
 	}
 	NotifyObservers(Change::TABLE);
+}
+
+void Model::DblClick(int i, int j)
+{
+	int flags = NumberOfNeighborFlags(i, j);
+
+	if (table[i][j] == flags)
+	{
+		Click(i - 1, j - 1);
+		Click(i - 1, j);
+		Click(i - 1, j + 1);
+		Click(i, j - 1);
+		Click(i, j + 1);
+		Click(i + 1, j - 1);
+		Click(i + 1, j);
+		Click(i + 1, j + 1);
+	}
 }
 
 void Model::PutFlag(int i, int j)
@@ -314,6 +336,143 @@ int Model::NumberOfNeighborBombs(int row, int column)
 	
 
 	return bombCounter;
+}
+
+int Model::NumberOfNeighborFlags(int row, int column)
+{
+	int flagCounter = 0;
+
+	if (discoveredTable[row][column] == DiscoveredStates::FLAG)
+		return 0;
+
+	if (row == 0 && column == 0)
+	{
+		for (int i = row; i < row + 2; i++)
+		{
+			for (int j = column; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if (row == 0 && column == ntable - 1)
+	{
+		for (int i = row; i < row + 2; i++)
+		{
+			for (int j = column; j > column - 2; j--)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if (row == mtable - 1 && column == 0)
+	{
+		for (int i = row; i > row - 2; i--)
+		{
+			for (int j = column; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if (row == mtable - 1 && column == ntable - 1)
+	{
+		for (int i = row; i > row - 2; i--)
+		{
+			for (int j = column; j > column - 2; j--)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if (row == 0 && (column != 0 && column != ntable - 1))
+	{
+		for (int i = row; i < row + 2; i++)
+		{
+			for (int j = column - 1; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if (row == mtable - 1 && (column != 0 && column != ntable - 1))
+	{
+		for (int i = row; i > row - 2; i--)
+		{
+			for (int j = column - 1; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if ((row != 0 && row != mtable - 1) && (column != 0 && column != ntable - 1))
+	{
+		for (int i = row - 1; i < row + 2; i++)
+		{
+			for (int j = column - 1; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if ((row != 0 && row != mtable - 1) && column == 0)
+	{
+		for (int i = row - 1; i < row + 2; i++)
+		{
+			for (int j = column; j < column + 2; j++)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+	if ((row != 0 && row != mtable - 1) && column == ntable - 1)
+	{
+		for (int i = row - 1; i < row + 2; i++)
+		{
+			for (int j = column; j > column - 2; j--)
+			{
+				if (discoveredTable[i][j] == DiscoveredStates::FLAG)
+				{
+					flagCounter++;
+				}
+			}
+		}
+	}
+
+
+	return flagCounter;
 }
 
 int Model::GetElementFromTableAt(int i, int j)

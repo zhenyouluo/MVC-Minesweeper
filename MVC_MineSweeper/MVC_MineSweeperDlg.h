@@ -65,4 +65,5 @@ public:
 	CEdit columnTxt;
 	CEdit rowTxt;
 	afx_msg void OnBnClickedRadio4();
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
