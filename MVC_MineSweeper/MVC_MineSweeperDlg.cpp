@@ -1,4 +1,4 @@
-
+﻿
 // MVC_MineSweeperDlg.cpp : implementation file
 //
 
@@ -116,7 +116,7 @@ void CMVC_MineSweeperDlg::OnPaint()
 		for (int j = 0; j < ntable; j++)
 			if (tabel[i][j] == UNDISCOVERED)
 			{
-				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("|_|"));
+				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("□"));
 			}
 			else if (tabel[i][j] == DISCOVERED)
 			{
@@ -124,16 +124,16 @@ void CMVC_MineSweeperDlg::OnPaint()
 			}
 			else if (tabel[i][j] == BOMB)
 			{
-				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("|b|"));
+				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("💣"));
 			}
 			else if (tabel[i][j] == FLAG)
 			{
-				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("|F|"));
+				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, _T("♪"));
 			}
 			else
 			{
 				CString str;
-				str.Format(_T("|%d|"), tabel[i][j]);
+				str.Format(_T("%d"), tabel[i][j]);
 
 				dc.TextOut(j * cellDimension + leftBarInPixels, i * cellDimension + upperBarInPixels, str);
 			}
